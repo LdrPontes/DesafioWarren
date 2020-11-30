@@ -2,6 +2,13 @@
 
 Esse desafio foi desenvolvido com o intuito de apresentar alguns conhecimentos e features do Android. Qualquer sugestão ou crítica é bem vinda! :D
 
+Contato:
+https://www.linkedin.com/in/ldrpontes/
+
+### Protótipo
+
+https://www.figma.com/file/F6DxaMVeRfLLRXQXEspyzT/Warren-Android?node-id=0%3A1
+
 ### Feature de Login
 * Buscar token de acesso na rota de login:
 * Exigir login apenas uma vez.     
