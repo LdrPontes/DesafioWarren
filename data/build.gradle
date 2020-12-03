@@ -43,5 +43,11 @@ dependencies {
 
     implementation project(':domain')
 
+    //network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    //di
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
 }
