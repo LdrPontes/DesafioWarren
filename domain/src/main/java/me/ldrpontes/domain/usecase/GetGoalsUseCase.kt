@@ -1,10 +1,11 @@
-package me.ldrpontes.domain.usecase.goal
+package me.ldrpontes.domain.usecase
 
 import me.ldrpontes.domain.entities.Goal
-import me.ldrpontes.domain.generics.BaseUseCase
+import me.ldrpontes.domain.usecase.BaseUseCase
 import me.ldrpontes.domain.repositories.GoalsRepository
 
-class GetGoalsUseCase(private val repository: GoalsRepository): BaseUseCase<GetGoalsResponse, GetGoalsParams> {
+class GetGoalsUseCase(private val repository: GoalsRepository):
+    BaseUseCase<GetGoalsResponse, GetGoalsParams> {
 
     override suspend fun execute(params: GetGoalsParams): GetGoalsResponse {
         val result = repository.getGoals(params.token)
