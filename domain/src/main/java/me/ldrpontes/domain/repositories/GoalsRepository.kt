@@ -1,7 +1,8 @@
 package me.ldrpontes.domain.repositories
 
+import kotlinx.coroutines.flow.Flow
 import me.ldrpontes.domain.entities.Goal
 
 interface GoalsRepository {
-    suspend fun getGoals(token: String): List<Goal>
+    suspend fun getGoals(token: String): Flow<List<Goal>>
 }
