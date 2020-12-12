@@ -1,17 +1,23 @@
 package me.ldrpontes.data.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import me.ldrpontes.data.database.models.Goal
+import me.ldrpontes.data.database.models.GoalDb
 
 @Dao
 interface GoalsDao {
+    @Transaction
+    suspend fun saveGoals(goals: List<GoalDb>){
+        deleteAll()
+        insertAll(goals)
+    }
+
     @Query("SELECT * FROM goals")
-    suspend fun getAll(): Flow<List<Goal>>
+    suspend fun getAll(): Flow<List<GoalDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(vararg goal: Goal)
+    suspend fun insertAll(goals: List<GoalDb>)
+
+    @Query("DELETE FROM goals")
+    suspend fun deleteAll()
 }

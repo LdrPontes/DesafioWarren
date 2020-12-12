@@ -1,8 +1,11 @@
 package me.ldrpontes.data.networking.models
 
 import com.google.gson.annotations.SerializedName
+import me.ldrpontes.domain.entities.Background
+import me.ldrpontes.domain.entities.Goal
 
-data class Goal(
+data class GoalResponse(
+
     @SerializedName("_id")
     val id: String,
     @SerializedName("name")
@@ -14,9 +17,11 @@ data class Goal(
     @SerializedName("goalDate")
     var goalDate: String,
     @SerializedName("background")
-    var background: Background
-) {
-    data class Background(
+    var background: BackgroundResponse
+
+) : DatabaseMapper<Goal> {
+
+    data class BackgroundResponse(
         @SerializedName("thumb")
         val thumb: String,
         @SerializedName("small")
@@ -28,4 +33,20 @@ data class Goal(
         @SerializedName("raw")
         val raw: String
     )
+
+    override fun mapToDatabase(): Goal = Goal(
+        id,
+        name,
+        totalBalance,
+        goalAmount,
+        goalDate,
+        Background(
+            background.thumb,
+            background.small,
+            background.full,
+            background.regular,
+            background.raw
+        )
+    )
+
 }
