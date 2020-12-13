@@ -14,7 +14,23 @@ inline fun <T : Any> Response<T>.getResult(
         if (isSuccessful && body != null) {
             onSuccess(body)
         } else {
-            onFailure(HttpError(code(), Throwable(message())))
+            onFailure(HttpError(code(), errorBody(), Throwable(message())))
+        }
+    } catch (e: Exception) {
+        onFailure(e)
+    }
+
+}
+
+inline fun <T : Any> Response<T>.getNoBodyResult(
+    onSuccess: (T?) -> Unit,
+    onFailure: (e: Exception) -> Unit
+) {
+    try {
+        if (isSuccessful) {
+            onSuccess(body())
+        } else {
+            onFailure(HttpError(code(), errorBody(), Throwable(message())))
         }
     } catch (e: Exception) {
         onFailure(e)
