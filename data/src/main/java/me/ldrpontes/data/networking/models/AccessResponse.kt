@@ -10,12 +10,4 @@ data class AccessResponse(
     @SerializedName("refreshToken")
     val refreshToken: String,
 
-    ) : DatabaseMapper<AccessDb> {
-
-    override fun mapToDatabase(): AccessDb = AccessDb(
-        accessToken = accessToken,
-        refreshToken = refreshToken
     )
-
-
-}

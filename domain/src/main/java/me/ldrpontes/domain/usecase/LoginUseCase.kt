@@ -2,9 +2,9 @@ package me.ldrpontes.domain.usecase
 
 import me.ldrpontes.domain.entities.Access
 import me.ldrpontes.domain.entities.Result
-import me.ldrpontes.domain.repositories.AuthRepository
+import me.ldrpontes.domain.repositories.AccessRepository
 
-class LoginUseCase(private val repository: AuthRepository) :
+class LoginUseCase(private val repository: AccessRepository) :
     BaseUseCase<Result<Access>, LoginParams> {
 
     override suspend fun execute(params: LoginParams): Result<Access> {

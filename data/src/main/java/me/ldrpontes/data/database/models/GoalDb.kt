@@ -17,7 +17,7 @@ data class GoalDb(
     @ColumnInfo(name = "goal_date") val goalDate: String,
     @Embedded val background: BackgroundDb
 
-) : DomainMapper<Goal> {
+) {
 
     data class BackgroundDb(
         val thumb: String,
@@ -25,21 +25,6 @@ data class GoalDb(
         val full: String,
         val regular: String,
         val raw: String
-    )
-
-    override fun mapToDomain(): Goal = Goal(
-        id,
-        name,
-        totalBalance,
-        goalAmount,
-        goalDate,
-        Background(
-            background.thumb,
-            background.small,
-            background.full,
-            background.regular,
-            background.raw
-        )
     )
 
 }

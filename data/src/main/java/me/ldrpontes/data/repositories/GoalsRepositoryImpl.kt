@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import me.ldrpontes.data.database.dao.GoalsDao
 import me.ldrpontes.data.mappers.GoalsMapper
-import me.ldrpontes.data.networking.getResult
+import me.ldrpontes.data.networking.handle
 import me.ldrpontes.data.networking.services.GoalsService
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.domain.repositories.GoalsRepository
@@ -21,7 +21,12 @@ class GoalsRepositoryImpl(
 
         return flow {
 
-            goalsService.getAll(token).getResult(
+            goalsDao.getAll().collect {
+                if (!it.isNullOrEmpty())
+                    emit(Result.Success(goalsMapper.mapDatabaseListToDomainList(it)))
+            }
+
+            goalsService.getAll(token).handle(
                 onSuccess = {
                     goalsDao.saveGoals(goalsMapper.mapNetworkingListToDatabaseList(it.portfolios))
                 },
@@ -30,9 +35,7 @@ class GoalsRepositoryImpl(
                 }
             )
 
-            goalsDao.getAll().collect {
-                emit(Result.Success(goalsMapper.mapDatabaseListToDomainList(it)))
-            }
+
         }
 
     }

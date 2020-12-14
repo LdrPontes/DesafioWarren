@@ -12,9 +12,4 @@ data class AccessDb(
     @ColumnInfo(name = "access_token") val accessToken: String,
     @ColumnInfo(name = "refresh_token") val refreshToken: String
 
-) : DomainMapper<Access> {
-
-    override fun mapToDomain(): Access = Access(accessToken, refreshToken)
-
-
-}
+)

@@ -1,5 +1,7 @@
 package me.ldrpontes.data.di
 
+import me.ldrpontes.data.networking.services.AccessService
+import me.ldrpontes.data.networking.services.GoalsService
 import org.koin.dsl.module
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -16,5 +18,13 @@ val networkingModule = module {
             .client(get())
             .addConverterFactory(get())
             .build()
+    }
+
+    single {
+        get<Retrofit>().create(GoalsService::class.java)
+    }
+
+    single {
+        get<Retrofit>().create(AccessService::class.java)
     }
 }

@@ -1,13 +1,27 @@
 package me.ldrpontes.data.mappers
 
-interface Mapper <Domain, Database, Networking> {
+import java.lang.Exception
 
-    fun mapDatabaseToDomain(data: Database): Domain
+abstract class Mapper <Domain, Database, Networking> {
 
-    fun mapNetworkingListToDatabaseList(data: List<Networking>): List<Database>
+    open fun mapDatabaseToDomain(data: Database): Domain {
+        throw Exception("Not implemented yet")
+    }
 
-    fun mapDatabaseListToDomainList(data: List<Database>): List<Domain>
+    open fun mapNetworkingListToDatabaseList(data: List<Networking>): List<Database> {
+        throw Exception("Not implemented yet")
+    }
 
-    fun  mapNetworkingToDatabase(data: Networking): Database
+    open fun mapDatabaseListToDomainList(data: List<Database>): List<Domain> {
+        throw Exception("Not implemented yet")
+    }
+
+    open fun  mapNetworkingToDatabase(data: Networking): Database {
+        throw Exception("Not implemented yet")
+    }
+
+    open fun  mapNetworkingToDomain(data: Networking): Domain {
+        throw Exception("Not implemented yet")
+    }
 
 }
