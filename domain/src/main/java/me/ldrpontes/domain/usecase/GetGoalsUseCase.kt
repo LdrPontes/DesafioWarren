@@ -1,36 +1,20 @@
 package me.ldrpontes.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import me.ldrpontes.domain.entities.Goal
-import me.ldrpontes.domain.entities.onFailure
-import me.ldrpontes.domain.entities.onSuccess
 import me.ldrpontes.domain.repositories.GoalsRepository
+import me.ldrpontes.domain.entities.Result
 
 class GetGoalsUseCase(private val repository: GoalsRepository) :
-    BaseUseCase<Flow<GetGoalsResponse>, GetGoalsParams> {
+    BaseUseCase<Flow<Result<List<Goal>>>, GetGoalsParams> {
 
-    override suspend fun execute(params: GetGoalsParams): Flow<GetGoalsResponse> {
+    override suspend fun execute(params: GetGoalsParams): Flow<Result<List<Goal>>> {
         val result = repository.getGoals(params.token)
 
-        return flow {
-
-            result.collect {
-
-                it.onSuccess { goals ->
-                    emit(GetGoalsResponse(goals))
-                }
-
-                it.onFailure { exception ->
-                    throw exception
-                }
-
-            }
-        }
+        return result.distinctUntilChanged()
     }
 }
 
 data class GetGoalsParams(val token: String)
 
-data class GetGoalsResponse(val result: List<Goal>)
