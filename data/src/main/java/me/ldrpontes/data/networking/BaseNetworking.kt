@@ -12,6 +12,15 @@ fun <T : Any> Response<T>.isResponseSuccessful(): Boolean {
     return isSuccessful && body != null
 }
 
+fun <T : Any> Response<T>.failure(): Exception? {
+    return if(isResponseSuccessful()){
+        null
+    } else {
+        HttpError(code(), errorBody(), Throwable(message()))
+    }
+
+}
+
 
 inline fun <T : Any> Response<T>.handle(
     onSuccess: (T) -> Unit,

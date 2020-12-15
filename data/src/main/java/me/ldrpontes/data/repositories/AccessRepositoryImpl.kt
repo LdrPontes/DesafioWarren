@@ -3,6 +3,7 @@ package me.ldrpontes.data.repositories
 import me.ldrpontes.data.database.dao.AccessDao
 import me.ldrpontes.data.database.models.AccessDb
 import me.ldrpontes.data.mappers.Mapper
+import me.ldrpontes.data.networking.failure
 import me.ldrpontes.data.networking.handle
 import me.ldrpontes.data.networking.isResponseSuccessful
 import me.ldrpontes.data.networking.models.AccessBody
@@ -24,30 +25,15 @@ class AccessRepositoryImpl(
 
         val response = accessService.doLogin(AccessBody(email, password))
 
-        if (response.isResponseSuccessful()) {
+        return if (response.isResponseSuccessful()) {
 
             accessDao.saveAccess(accessMapper.mapNetworkingToDatabase(response.body()!!))
-        }
 
-
-        return suspendCoroutine { continuation ->
-            response.handle(
-                onSuccess = {
-
-                    continuation.resumeWith(
-                        kotlin.Result.success(
-                            Result.Success<Access>(
-                                accessMapper.mapNetworkingToDomain(it)
-                            )
-                        )
-                    )
-
-                }, onFailure = {
-
-                    continuation.resumeWith(kotlin.Result.success(Result.Failure(it)))
-
-                })
-
+            Result.Success<Access>(
+                accessMapper.mapNetworkingToDomain(response.body()!!)
+            )
+        } else {
+            Result.Failure(response.failure()!!)
         }
     }
 
@@ -57,7 +43,7 @@ class AccessRepositoryImpl(
 
             Result.Success(accessMapper.mapDatabaseToDomain(response))
 
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Result.Failure(e)
         }
 
