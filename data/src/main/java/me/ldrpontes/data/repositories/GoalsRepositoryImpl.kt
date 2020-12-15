@@ -7,9 +7,9 @@ import me.ldrpontes.data.database.dao.GoalsDao
 import me.ldrpontes.data.mappers.GoalsMapper
 import me.ldrpontes.data.networking.handle
 import me.ldrpontes.data.networking.services.GoalsService
+import me.ldrpontes.domain.entities.DataResult
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.domain.repositories.GoalsRepository
-import me.ldrpontes.domain.entities.Result
 
 class GoalsRepositoryImpl(
     private val goalsService: GoalsService,
@@ -17,13 +17,13 @@ class GoalsRepositoryImpl(
     private val goalsMapper: GoalsMapper
 ) : GoalsRepository {
 
-    override suspend fun getGoals(token: String): Flow<Result<List<Goal>>> {
+    override suspend fun getGoals(token: String): Flow<DataResult<List<Goal>>> {
 
         return flow {
 
             goalsDao.getAll().collect {
                 if (!it.isNullOrEmpty())
-                    emit(Result.Success(goalsMapper.mapDatabaseListToDomainList(it)))
+                    emit(DataResult.Success(goalsMapper.mapDatabaseListToDomainList(it)))
             }
 
             goalsService.getAll(token).handle(
@@ -31,7 +31,7 @@ class GoalsRepositoryImpl(
                     goalsDao.saveGoals(goalsMapper.mapNetworkingListToDatabaseList(it.portfolios))
                 },
                 onFailure = {
-                    emit(Result.Failure(it))
+                    emit(DataResult.Failure(it))
                 }
             )
 
