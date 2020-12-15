@@ -19,7 +19,7 @@ data class GoalResponse(
     @SerializedName("background")
     var background: BackgroundResponse
 
-) : DatabaseMapper<Goal> {
+) {
 
     data class BackgroundResponse(
         @SerializedName("thumb")
@@ -32,21 +32,6 @@ data class GoalResponse(
         val regular: String,
         @SerializedName("raw")
         val raw: String
-    )
-
-    override fun mapToDatabase(): Goal = Goal(
-        id,
-        name,
-        totalBalance,
-        goalAmount,
-        goalDate,
-        Background(
-            background.thumb,
-            background.small,
-            background.full,
-            background.regular,
-            background.raw
-        )
     )
 
 }

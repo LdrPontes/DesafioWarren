@@ -13,7 +13,7 @@ interface GoalsDao {
     }
 
     @Query("SELECT * FROM goals")
-    suspend fun getAll(): Flow<List<GoalDb>>
+    fun getAll(): Flow<List<GoalDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(goals: List<GoalDb>)

@@ -17,9 +17,9 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    single<Mapper<Goal, GoalDb, GoalResponse>> { GoalsMapper() }
+    single { GoalsMapper() }
 
-    single<Mapper<Access, AccessDb, AccessResponse>> { AccessMapper() }
+    single { AccessMapper() }
 
     factory<GoalsRepository> { GoalsRepositoryImpl(get(), get(), get()) }
 
