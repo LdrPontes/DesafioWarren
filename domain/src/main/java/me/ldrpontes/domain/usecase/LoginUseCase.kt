@@ -1,13 +1,13 @@
 package me.ldrpontes.domain.usecase
 
 import me.ldrpontes.domain.entities.Access
-import me.ldrpontes.domain.entities.Result
+import me.ldrpontes.domain.entities.DataResult
 import me.ldrpontes.domain.repositories.AccessRepository
 
 class LoginUseCase(private val repository: AccessRepository) :
-    BaseUseCase<Result<Access>, LoginParams> {
+    BaseUseCase<DataResult<Access>, LoginParams> {
 
-    override suspend fun execute(params: LoginParams): Result<Access> {
+    override suspend fun execute(params: LoginParams): DataResult<Access> {
         
         return repository.doLogin(email = params.email, password = params.password)
     }
