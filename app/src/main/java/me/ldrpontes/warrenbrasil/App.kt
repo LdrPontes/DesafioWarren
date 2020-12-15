@@ -1,6 +1,9 @@
 package me.ldrpontes.warrenbrasil
 
 import android.app.Application
+import me.ldrpontes.data.di.databaseModule
+import me.ldrpontes.data.di.networkingModule
+import me.ldrpontes.data.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,8 +17,10 @@ class App: Application() {
         startKoin {
             androidContext(this@App)
             if (BuildConfig.DEBUG) androidLogger(Level.DEBUG)
-            //modules(appModules + domainModules + dataModules)
+            modules(dataModules)
         }
     }
+
+    private val dataModules = listOf(networkingModule, repositoryModule, databaseModule)
 
 }
