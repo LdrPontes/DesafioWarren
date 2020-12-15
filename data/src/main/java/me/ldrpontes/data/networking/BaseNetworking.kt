@@ -18,10 +18,9 @@ inline fun <T : Any> Response<T>.handle(
     onFailure: (e: Exception) -> Unit
 ) {
     try {
-        val body = body()
 
-        if (isSuccessful && body != null) {
-            onSuccess(body)
+        if (isResponseSuccessful()) {
+            onSuccess(body()!!)
         } else {
             onFailure(HttpError(code(), errorBody(), Throwable(message())))
         }
