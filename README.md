@@ -9,10 +9,9 @@ https://www.linkedin.com/in/ldrpontes/
 
 https://www.figma.com/file/F6DxaMVeRfLLRXQXEspyzT/Warren-Android?node-id=0%3A1
 
-## MAD Score (15/12/2020)
+### MAD Score (15/12/2020)
 
 ![alt text](https://i.imgur.com/PxqJ95n.png)
-
 
 ### Feature de Login
 * Buscar token de acesso na rota de login:
