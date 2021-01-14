@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/listGoalsFragment">
+
+    <fragment
+        android:id="@+id/listGoalsFragment"
+        android:name="me.ldrpontes.warrenbrasil.ui.goals.ListGoalsFragment"
+        android:label="fragment_list_goals"
+        tools:layout="@layout/fragment_list_goals" >
+        <action
+            android:id="@+id/action_listGoalsFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="me.ldrpontes.warrenbrasil.ui.goals.GoalFragment"
+        android:label="fragment_goal"
+        tools:layout="@layout/fragment_goal">
+
+    </fragment>
+
+</navigation>

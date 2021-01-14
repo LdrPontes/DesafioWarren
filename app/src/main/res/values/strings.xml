@@ -3,4 +3,6 @@
     <string name="label_email">E-mail:</string>
     <string name="label_password">Senha:</string>
     <string name="label_sign_in">Entrar</string>
+    <string name="goals">Objetivos</string>
+    <string name="search">Pesquisar..</string>
 </resources>

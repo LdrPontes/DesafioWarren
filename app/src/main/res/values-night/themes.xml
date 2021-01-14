@@ -14,5 +14,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/darkBackgroundColor</item>
+
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+    </style>
+
+    <style name="SearchView.Warrenbrasil" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/grey_400</item>
+        <item name="colorSecondary">@color/grey_400</item>
     </style>
 </resources>
