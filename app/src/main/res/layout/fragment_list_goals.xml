@@ -45,7 +45,8 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:contentInsetStart="0dp">
 
                 <androidx.appcompat.widget.SearchView
                     android:theme="@style/SearchView.Warrenbrasil"
@@ -59,7 +60,7 @@
                     app:iconifiedByDefault="false"
                     app:queryBackground="@null"
                     app:queryHint="@string/search"
-                    app:layout_scrollFlags="scroll"/>
+                    app:layout_scrollFlags="scroll" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 
