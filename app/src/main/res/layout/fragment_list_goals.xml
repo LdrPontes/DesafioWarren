@@ -15,6 +15,7 @@
             android:id="@+id/rv_list_goals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -34,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/goals"
                     android:textSize="24sp"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
@@ -48,19 +49,26 @@
                 android:layout_height="wrap_content"
                 app:contentInsetStart="0dp">
 
-                <androidx.appcompat.widget.SearchView
-                    android:theme="@style/SearchView.Warrenbrasil"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tl_search"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/shape_search"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    app:iconifiedByDefault="false"
-                    app:queryBackground="@null"
-                    app:queryHint="@string/search"
-                    app:layout_scrollFlags="scroll" />
+                    app:startIconDrawable="@drawable/ic_baseline_search_24"
+                    app:endIconDrawable="@drawable/ic_baseline_close_24"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ted_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/shape_search"
+                        android:hint="@string/search"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>
 

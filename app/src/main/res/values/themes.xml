@@ -23,4 +23,9 @@
         <item name="android:textColorHint">@color/grey_600</item>
         <item name="colorSecondary">@color/grey_600</item>
     </style>
+
+    <style name="ShapeImageViewListGoals" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

@@ -8,12 +8,15 @@ import kotlinx.android.synthetic.main.activity_login.*
 import me.ldrpontes.warrenbrasil.R
 import me.ldrpontes.warrenbrasil.databinding.ActivityLoginBinding
 import me.ldrpontes.warrenbrasil.ui.goals.GoalActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
     val binding : ActivityLoginBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_login)
     }
+
+    private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

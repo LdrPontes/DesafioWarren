@@ -4,6 +4,7 @@ import android.app.Application
 import me.ldrpontes.data.di.databaseModule
 import me.ldrpontes.data.di.networkingModule
 import me.ldrpontes.data.di.repositoryModule
+import me.ldrpontes.warrenbrasil.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,6 +22,6 @@ class App: Application() {
         }
     }
 
-    private val dataModules = listOf(networkingModule, repositoryModule, databaseModule)
+    private val dataModules = listOf(appModule, networkingModule, repositoryModule, databaseModule)
 
 }
