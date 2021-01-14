@@ -14,7 +14,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/grey_200</item>
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/lightBackgroundColor</item>
-
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:textColorPrimary">@color/black</item>
     </style>
 
