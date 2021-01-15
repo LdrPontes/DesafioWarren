@@ -1,17 +1,22 @@
 package me.ldrpontes.warrenbrasil.ui.goals
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_list_goals.*
 import me.ldrpontes.domain.entities.Background
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.warrenbrasil.R
 import me.ldrpontes.warrenbrasil.ui.adapters.ListGoalsAdapter
+import me.ldrpontes.warrenbrasil.utils.State
 import me.ldrpontes.warrenbrasil.utils.hideKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,174 +40,14 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
 
         startSearchInputListeners()
         startRecyclerViewGoals()
-
-        goalsList.addAll(
-            arrayListOf(
-                Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney!",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ),
-                Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ), Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 1",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                ),
-                Goal(
-                    "5d9e29c7b6c3123b9f5f3268",
-                    "Disney 2",
-                    522.2952415271,
-                    200000.0,
-                    "2029-10-09",
-                    background = Background(
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjg3NTU5fQ",
-                        "https://images.unsplash.com/photo-1463109598173-3864231fade5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjg3NTU5fQ"
-                    )
-                )
-            )
-        )
-
-        updateRecyclerViewGoals()
+        startGoalsObserver()
     }
 
+    private fun startGoalsObserver() {
+        goalViewModel.goals.observe(viewLifecycleOwner, {
+            goalsObserverHandler(it)
+        })
+    }
 
     private fun startSearchInputListeners() {
         tl_search.setEndIconOnClickListener {
@@ -217,8 +62,26 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         rv_list_goals.adapter = adapter
     }
 
+    private fun goalsObserverHandler(state: State<List<Goal>>) {
+        when (state) {
+            is State.Success -> {
+                updateRecyclerViewGoals(state.data)
+            }
+            is State.Failure -> {
+                Snackbar.make(this.requireView(), state.message, Snackbar.LENGTH_LONG).show()
+            }
+            is State.Loading -> {
+                if (state.loading)
+                    Toast.makeText(context, "Carregando", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(context, "Carregou", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
-    private fun updateRecyclerViewGoals() {
+    private fun updateRecyclerViewGoals(data: List<Goal>) {
+        goalsList.clear()
+        goalsList.addAll(data)
         rv_list_goals.adapter?.notifyDataSetChanged()
     }
 
