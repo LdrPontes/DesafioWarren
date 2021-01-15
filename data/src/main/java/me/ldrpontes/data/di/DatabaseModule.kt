@@ -14,4 +14,8 @@ val databaseModule = module {
             AppDatabase::class.java, "warren-database"
         ).build()
     }
+
+    factory { get<AppDatabase>().accessDao() }
+
+    factory { get<AppDatabase>().goalsDao() }
 }
