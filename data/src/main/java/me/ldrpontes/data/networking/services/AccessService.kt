@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface AccessService {
 
-    @POST("/account/login")
+    @POST("account/login")
     suspend fun doLogin(@Body body: AccessBody): Response<AccessResponse>
 
 }
