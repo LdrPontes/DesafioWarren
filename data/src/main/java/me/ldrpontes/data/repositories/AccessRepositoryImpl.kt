@@ -2,6 +2,7 @@ package me.ldrpontes.data.repositories
 
 import me.ldrpontes.data.database.dao.AccessDao
 import me.ldrpontes.data.database.models.AccessDb
+import me.ldrpontes.data.mappers.AccessMapper
 import me.ldrpontes.data.mappers.Mapper
 import me.ldrpontes.data.networking.failure
 import me.ldrpontes.data.networking.isResponseSuccessful
@@ -16,23 +17,27 @@ import java.lang.Exception
 class AccessRepositoryImpl(
     private val accessService: AccessService,
     private val accessDao: AccessDao,
-    private val accessMapper: Mapper<Access, AccessDb, AccessResponse>
+    private val accessMapper: AccessMapper
 ) : AccessRepository {
 
     override suspend fun doLogin(email: String, password: String): DataResult<Access> {
+        try {
+            val response = accessService.doLogin(AccessBody(email, password))
 
-        val response = accessService.doLogin(AccessBody(email, password))
+            return if (response.isResponseSuccessful()) {
 
-        return if (response.isResponseSuccessful()) {
+                accessDao.saveAccess(accessMapper.mapNetworkingToDatabase(response.body()!!))
 
-            accessDao.saveAccess(accessMapper.mapNetworkingToDatabase(response.body()!!))
-
-            DataResult.Success<Access>(
-                accessMapper.mapNetworkingToDomain(response.body()!!)
-            )
-        } else {
-            DataResult.Failure(response.failure()!!)
+                DataResult.Success<Access>(
+                    accessMapper.mapNetworkingToDomain(response.body()!!)
+                )
+            } else {
+                DataResult.Failure(response.failure()!!)
+            }
+        } catch (e: Exception) {
+            return DataResult.Failure(e)
         }
+
     }
 
     override suspend fun haveAccess(): DataResult<Access> {
