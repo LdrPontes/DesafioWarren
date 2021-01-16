@@ -1,6 +1,6 @@
 package me.ldrpontes.data.utils
 
-import okhttp3.ResponseBody
+import me.ldrpontes.domain.entities.Error
 import java.lang.Exception
 
-class HttpError(code: Int, errorBody: ResponseBody?, cause: Throwable?) : Exception(cause)
+class HttpError(val code: Int, val error: Error, cause: Throwable?) : Exception(cause)

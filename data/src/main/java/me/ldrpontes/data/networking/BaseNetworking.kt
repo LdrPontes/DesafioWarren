@@ -1,6 +1,8 @@
 package me.ldrpontes.data.networking
 
+import com.google.gson.Gson
 import me.ldrpontes.data.utils.HttpError
+import me.ldrpontes.domain.entities.Error
 import retrofit2.Response
 import java.lang.Exception
 
@@ -13,10 +15,17 @@ fun <T : Any> Response<T>.isResponseSuccessful(): Boolean {
 }
 
 fun <T : Any> Response<T>.failure(): Exception? {
-    return if(isResponseSuccessful()){
+    return if (isResponseSuccessful()) {
         null
     } else {
-        HttpError(code(), errorBody(), Throwable(message()))
+        HttpError(
+            code(),
+            if (errorBody() != null) Gson().fromJson(
+                errorBody()!!.string(),
+                Error::class.java
+            ) else Error(""),
+            Throwable(message())
+        )
     }
 
 }
@@ -31,7 +40,16 @@ inline fun <T : Any> Response<T>.handle(
         if (isResponseSuccessful()) {
             onSuccess(body()!!)
         } else {
-            onFailure(HttpError(code(), errorBody(), Throwable(message())))
+            onFailure(
+                HttpError(
+                    code(),
+                    if (errorBody() != null) Gson().fromJson(
+                        errorBody()!!.string(),
+                        Error::class.java
+                    ) else Error(""),
+                    Throwable(message())
+                )
+            )
         }
     } catch (e: Exception) {
         onFailure(e)
