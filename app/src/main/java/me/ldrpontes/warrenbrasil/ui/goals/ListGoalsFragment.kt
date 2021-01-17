@@ -21,14 +21,15 @@ import me.ldrpontes.warrenbrasil.R
 import me.ldrpontes.warrenbrasil.ui.adapters.ListGoalsAdapter
 import me.ldrpontes.warrenbrasil.utils.State
 import me.ldrpontes.warrenbrasil.utils.hideKeyboard
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
 
     private val goalsList: ArrayList<Goal> = ArrayList()
     private val adapter: ListGoalsAdapter = ListGoalsAdapter(goalsList, this)
-    private val goalViewModel: GoalViewModel by viewModel()
-
+    private val goalViewModel: GoalViewModel by sharedViewModel()
+    private var getGoalsCalled = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,12 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         startRecyclerViewGoals()
         startGoalsObserver()
         startTryAgainButtonListener()
-        getGoalsHandler()
+        startSwipeToRefreshListener()
+
+        if (!getGoalsCalled) {
+            getGoalsHandler()
+            getGoalsCalled = true
+        }
 
     }
 
@@ -120,6 +126,13 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
     }
 
 
+    private fun startSwipeToRefreshListener() {
+        swipe_to_refresh_goals.setOnRefreshListener {
+            getGoalsHandler()
+        }
+    }
+
+
     private fun loadingHandler(isLoading: Boolean) {
         if (isLoading) {
             loading_layout.visibility = View.VISIBLE
@@ -127,6 +140,7 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
             loading_layout.visibility = View.GONE
         }
     }
+
 
     private fun failureHandler(message: String) {
         GlobalScope.launch(Dispatchers.Main) {
@@ -136,6 +150,7 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
             ln_error_goals.visibility = View.GONE
         }
     }
+
 
     override fun onGoalClickListener(goal: Goal) {
         goalViewModel.selectedGoal = goal
