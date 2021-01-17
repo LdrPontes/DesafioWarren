@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_list_goals.*
+import kotlinx.android.synthetic.main.no_data_layout.*
+import kotlinx.coroutines.*
 import me.ldrpontes.domain.entities.Background
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.warrenbrasil.R
@@ -24,8 +27,8 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
 
     private val goalsList: ArrayList<Goal> = ArrayList()
     private val adapter: ListGoalsAdapter = ListGoalsAdapter(goalsList, this)
-
     private val goalViewModel: GoalViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +44,18 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         startSearchInputListeners()
         startRecyclerViewGoals()
         startGoalsObserver()
+        startTryAgainButtonListener()
+        getGoalsHandler()
+
     }
+
 
     private fun startGoalsObserver() {
         goalViewModel.goals.observe(viewLifecycleOwner, {
             goalsObserverHandler(it)
         })
     }
+
 
     private fun startSearchInputListeners() {
         tl_search.setEndIconOnClickListener {
@@ -57,10 +65,12 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         }
     }
 
+
     private fun startRecyclerViewGoals() {
         rv_list_goals.layoutManager = LinearLayoutManager(context)
         rv_list_goals.adapter = adapter
     }
+
 
     private fun goalsObserverHandler(state: State<List<Goal>>) {
         when (state) {
@@ -68,26 +78,70 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
                 updateRecyclerViewGoals(state.data)
             }
             is State.Failure -> {
-                Snackbar.make(this.requireView(), state.message, Snackbar.LENGTH_LONG).show()
+                failureHandler(state.message)
             }
             is State.Loading -> {
-                if (state.loading)
-                    Toast.makeText(context, "Carregando", Toast.LENGTH_SHORT).show()
-                else
-                    Toast.makeText(context, "Carregou", Toast.LENGTH_SHORT).show()
+                loadingHandler(state.loading)
             }
         }
     }
 
+
     private fun updateRecyclerViewGoals(data: List<Goal>) {
+
+        goalsDataEmptyHandler(data.isEmpty())
+
         goalsList.clear()
         goalsList.addAll(data)
         rv_list_goals.adapter?.notifyDataSetChanged()
     }
 
-    override fun onGoalClickListener(goal: Goal) {
-        TODO("Open goal fragment")
+
+    private fun goalsDataEmptyHandler(isEmpty: Boolean) {
+        if (isEmpty) {
+            rv_list_goals.visibility = View.GONE
+            no_data_layout.visibility = View.VISIBLE
+        } else {
+            rv_list_goals.visibility = View.VISIBLE
+            no_data_layout.visibility = View.GONE
+        }
     }
 
+
+    private fun startTryAgainButtonListener() {
+        btn_try_again.setOnClickListener {
+            getGoalsHandler()
+        }
+    }
+
+
+    private fun getGoalsHandler() {
+        goalViewModel.getGoalsHandler()
+    }
+
+
+    private fun loadingHandler(isLoading: Boolean) {
+        if (isLoading) {
+            loading_layout.visibility = View.VISIBLE
+        } else {
+            loading_layout.visibility = View.GONE
+        }
+    }
+
+    private fun failureHandler(message: String) {
+        GlobalScope.launch(Dispatchers.Main) {
+            ln_error_goals.visibility = View.VISIBLE
+            tv_error_goals.text = message
+            delay(3000)
+            ln_error_goals.visibility = View.GONE
+        }
+    }
+
+    override fun onGoalClickListener(goal: Goal) {
+        goalViewModel.selectedGoal = goal
+
+        val action = ListGoalsFragmentDirections.nextAction()
+        findNavController().navigate(action)
+    }
 
 }

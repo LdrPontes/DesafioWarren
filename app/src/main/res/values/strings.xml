@@ -10,4 +10,7 @@
     <string name="wrong_email">Informe um e-mail válido</string>
     <string name="bad_request_error">Verifique seus dados e tente novamente!</string>
     <string name="general_error">Falha ao realizar a requisição,  tente novamente!</string>
+    <string name="no_data">Não há dados para mostrar.</string>
+    <string name="try_again">Tentar novamente</string>
+    <string name="loading">Carregando...</string>
 </resources>

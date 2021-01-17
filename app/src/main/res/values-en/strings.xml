@@ -10,4 +10,7 @@
     <string name="wrong_email">Enter a valid email</string>
     <string name="bad_request_error">Check your data and try again!</string>
     <string name="general_error">Failed to perform the request, try again</string>
+    <string name="no_data">There is no data to show</string>
+    <string name="try_again">Try again</string>
+    <string name="loading">Carregando...</string>
 </resources>
