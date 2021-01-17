@@ -14,6 +14,7 @@ import me.ldrpontes.domain.usecase.GetGoalsParams
 import me.ldrpontes.domain.usecase.GetGoalsUseCase
 import me.ldrpontes.warrenbrasil.App
 import me.ldrpontes.warrenbrasil.R
+import me.ldrpontes.warrenbrasil.utils.SingleLiveEvent
 import me.ldrpontes.warrenbrasil.utils.State
 import me.ldrpontes.warrenbrasil.utils.onFailure
 import me.ldrpontes.warrenbrasil.utils.onSuccess
@@ -28,7 +29,7 @@ class GoalViewModel(
 
 
     var selectedGoal: Goal? = null
-    val goals: MutableLiveData<State<List<Goal>>> = MutableLiveData()
+    val goals: SingleLiveEvent<State<List<Goal>>> = SingleLiveEvent()
 
 
     internal fun getGoalsHandler() {

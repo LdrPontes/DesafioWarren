@@ -12,5 +12,9 @@
     <string name="general_error">Failed to perform the request, try again</string>
     <string name="no_data">There is no data to show</string>
     <string name="try_again">Try again</string>
-    <string name="loading">Carregando...</string>
+    <string name="loading">Loading…</string>
+    <string name="closes_in">Closes in:</string>
+    <string name="goal">Goal</string>
+    <string name="total">Total</string>
+    <string name="completed">%1$s completed</string>
 </resources>

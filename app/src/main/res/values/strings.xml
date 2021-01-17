@@ -13,4 +13,8 @@
     <string name="no_data">Não há dados para mostrar.</string>
     <string name="try_again">Tentar novamente</string>
     <string name="loading">Carregando...</string>
+    <string name="closes_in">Ëncerra em:</string>
+    <string name="goal">Meta</string>
+    <string name="total">Total</string>
+    <string name="completed">%1$s concluído</string>
 </resources>

@@ -23,4 +23,12 @@
         <item name="android:textColorHint">@color/grey_400</item>
         <item name="colorSecondary">@color/grey_400</item>
     </style>
+
+    <style name="CustomToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="CustomLoadingImageBackground" parent="">
+        <item name="android:background">@color/lowOpacityGrey</item>
+    </style>
 </resources>

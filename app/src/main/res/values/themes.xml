@@ -28,4 +28,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="CustomToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="colorControlNormal">@color/black</item>
+    </style>
+
+    <style name="CustomLoadingImageBackground" parent="">
+        <item name="android:background">@color/grey_200</item>
+    </style>
 </resources>

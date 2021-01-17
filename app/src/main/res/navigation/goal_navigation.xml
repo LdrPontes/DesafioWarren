@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/listGoalsFragment"
         android:name="me.ldrpontes.warrenbrasil.ui.goals.ListGoalsFragment"
-        android:label="fragment_list_goals"
         tools:layout="@layout/fragment_list_goals" >
         <action
             android:id="@+id/next_action"
@@ -18,7 +17,6 @@
     <fragment
         android:id="@+id/goalFragment"
         android:name="me.ldrpontes.warrenbrasil.ui.goals.GoalFragment"
-        android:label="fragment_goal"
         tools:layout="@layout/fragment_goal">
 
     </fragment>
