@@ -1,6 +1,8 @@
 package me.ldrpontes.warrenbrasil.ui.goals
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +41,6 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         startSearchInputListeners()
         startRecyclerViewGoals()
         startGoalsObserver()
-        startTryAgainButtonListener()
         startSwipeToRefreshListener()
 
         if (!getGoalsCalled) {
@@ -63,6 +64,16 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
             ted_search.clearFocus()
             this.hideKeyboard()
         }
+
+        ted_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter.filter(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
 
@@ -104,13 +115,6 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         } else {
             rv_list_goals.visibility = View.VISIBLE
             no_data_layout.visibility = View.GONE
-        }
-    }
-
-
-    private fun startTryAgainButtonListener() {
-        btn_try_again.setOnClickListener {
-            getGoalsHandler()
         }
     }
 
