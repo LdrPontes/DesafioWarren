@@ -94,7 +94,6 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, GoalActivity::class.java))
             }
             is State.Failure -> {
-                Log.d("LoginActivity", "Chamou")
                 ln_error.visibility = View.VISIBLE
                 tv_error_login.text = state.message
             }
