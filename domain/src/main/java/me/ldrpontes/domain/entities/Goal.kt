@@ -8,4 +8,12 @@ data class Goal(val id: String, var name: String, var totalBalance: Double, var 
             false
         }
     }
+
+    fun getTotalBalancePercentage(): Float?{
+        return if(goalAmount != null) {
+            ((totalBalance / goalAmount!!) * 100).toFloat()
+        } else {
+            null
+        }
+    }
 }
