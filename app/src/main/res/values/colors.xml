@@ -17,4 +17,5 @@
     <color name="darkBackgroundColor">#121212</color>
     <color name="lightBackgroundColor">#FFFFFF</color>
     <color name="searchViewBackgroundColor">#4D979797</color>
+    <color name="error">#C61636</color>
 </resources>

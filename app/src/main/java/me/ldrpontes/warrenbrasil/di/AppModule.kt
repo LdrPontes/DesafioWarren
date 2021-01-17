@@ -19,6 +19,6 @@ val appModule = module {
 
     viewModel { GoalViewModel(get(), get(), get()) }
 
-    viewModel { LoginViewModel(get(), get()) }
+    viewModel { LoginViewModel(get(), get(), get()) }
 
 }

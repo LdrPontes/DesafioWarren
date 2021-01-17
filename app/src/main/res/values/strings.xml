@@ -5,4 +5,9 @@
     <string name="label_sign_in">Entrar</string>
     <string name="goals">Objetivos</string>
     <string name="search">Pesquisar..</string>
+    <string name="empty_email_error">Informe um e-mail</string>
+    <string name="empty_password_error">Informe uma senha</string>
+    <string name="wrong_email">Informe um e-mail válido</string>
+    <string name="bad_request_error">Verifique seus dados e tente novamente!</string>
+    <string name="general_error">Falha ao realizar a requisição,  tente novamente!</string>
 </resources>

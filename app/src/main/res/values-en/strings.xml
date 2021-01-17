@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Warren Brasil</string>
-    <string name="label_email">E-mail:</string>
+    <string name="label_email">Email:</string>
     <string name="label_password">Password:</string>
     <string name="label_sign_in">Sign In</string>
     <string name="goals">Goals</string>
     <string name="search">Search..</string>
+    <string name="empty_email_error">Enter an email</string>
+    <string name="empty_password_error">Enter a password</string>
+    <string name="wrong_email">Enter a valid email</string>
+    <string name="bad_request_error">Check your data and try again!</string>
+    <string name="general_error">Failed to perform the request, try again</string>
 </resources>
