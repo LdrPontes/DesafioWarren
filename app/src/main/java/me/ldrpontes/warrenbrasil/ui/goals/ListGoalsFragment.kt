@@ -1,28 +1,22 @@
 package me.ldrpontes.warrenbrasil.ui.goals
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_list_goals.*
 import kotlinx.android.synthetic.main.no_data_layout.*
 import kotlinx.coroutines.*
-import me.ldrpontes.domain.entities.Background
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.warrenbrasil.R
 import me.ldrpontes.warrenbrasil.ui.adapters.ListGoalsAdapter
 import me.ldrpontes.warrenbrasil.utils.State
 import me.ldrpontes.warrenbrasil.utils.hideKeyboard
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
 
@@ -148,11 +142,14 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
     }
 
 
-    override fun onGoalClickListener(goal: Goal) {
+    override fun onGoalClickListener(imageView: View, titleView: View, goal: Goal) {
         goalViewModel.selectedGoal = goal
 
-        val action = ListGoalsFragmentDirections.nextAction()
-        findNavController().navigate(action)
-    }
+        val extras = FragmentNavigatorExtras(
+            imageView to "iv_goal_detail",
+            titleView to "tv_goal_detail"
+        )
 
+        findNavController().navigate(R.id.next_action, null, null, extras)
+    }
 }
