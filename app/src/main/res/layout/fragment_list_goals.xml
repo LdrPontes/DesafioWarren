@@ -11,10 +11,6 @@
         layout="@layout/no_data_layout"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/loading_layout"
-        layout="@layout/loading_layout"
-        android:visibility="gone" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cl_goals"

@@ -134,11 +134,7 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
 
 
     private fun loadingHandler(isLoading: Boolean) {
-        if (isLoading) {
-            loading_layout.visibility = View.VISIBLE
-        } else {
-            loading_layout.visibility = View.GONE
-        }
+        swipe_to_refresh_goals.isRefreshing = isLoading
     }
 
 
