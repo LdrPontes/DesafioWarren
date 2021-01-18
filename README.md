@@ -9,7 +9,7 @@ https://www.linkedin.com/in/ldrpontes/
 
 https://www.figma.com/file/F6DxaMVeRfLLRXQXEspyzT/Warren-Android?node-id=0%3A1
 
-### MAD Score (15/12/2020)
+### MAD Score (17/01/2021)
 
 ![alt text](https://i.imgur.com/sEKfEHm.png)
 
