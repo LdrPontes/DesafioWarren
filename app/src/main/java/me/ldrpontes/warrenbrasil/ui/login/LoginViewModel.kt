@@ -19,7 +19,6 @@ import me.ldrpontes.warrenbrasil.utils.State
 import java.lang.Exception
 
 class LoginViewModel(
-    private val getAccessUseCase: GetAccessUseCase,
     private val loginUseCase: LoginUseCase,
     application: Application
 ) :
@@ -28,17 +27,6 @@ class LoginViewModel(
     var email: String = ""
     var password: String = ""
     val loginState: MutableLiveData<State<Access>> = MutableLiveData()
-    val accessState: LiveData<Boolean> = liveData {
-        emit(getAccess())
-    }
-
-
-    private suspend fun getAccess(): Boolean {
-
-        val result = getAccessUseCase.execute()
-
-        return result is DataResult.Success
-    }
 
 
     fun doLogin() = viewModelScope.launch {

@@ -5,6 +5,7 @@ import me.ldrpontes.domain.usecase.GetGoalsUseCase
 import me.ldrpontes.domain.usecase.LoginUseCase
 import me.ldrpontes.warrenbrasil.ui.goals.GoalViewModel
 import me.ldrpontes.warrenbrasil.ui.login.LoginViewModel
+import me.ldrpontes.warrenbrasil.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -19,6 +20,8 @@ val appModule = module {
 
     viewModel { GoalViewModel(get(), get(), get()) }
 
-    viewModel { LoginViewModel(get(), get(), get()) }
+    viewModel { LoginViewModel(get(), get()) }
+
+    viewModel { SplashViewModel(get(), get()) }
 
 }

@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.model = loginViewModel
 
-        startAccessObserver()
         startLoginObserver()
     }
 
@@ -68,15 +67,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return false
-    }
-
-
-    private fun startAccessObserver() {
-        loginViewModel.accessState.observe(this, {
-            if (it) {
-                startActivity(Intent(this, GoalActivity::class.java))
-            }
-        })
     }
 
 
