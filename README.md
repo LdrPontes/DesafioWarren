@@ -11,8 +11,11 @@ https://www.figma.com/file/F6DxaMVeRfLLRXQXEspyzT/Warren-Android?node-id=0%3A1
 
 ### MAD Score (15/12/2020)
 
-![alt text](https://i.imgur.com/PxqJ95n.png)
+![alt text](https://i.imgur.com/sEKfEHm.png)
 
+![alt text](https://i.imgur.com/FU9tuHx.png)
+
+![alt text](https://i.imgur.com/VrRnUfd.png)
 
 # O Desafio
 
