@@ -45,6 +45,7 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:tint="?android:textColorPrimary"
                 android:src="@drawable/ic_baseline_event_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

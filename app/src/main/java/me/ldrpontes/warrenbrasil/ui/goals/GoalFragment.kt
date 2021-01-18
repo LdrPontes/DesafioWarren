@@ -154,7 +154,7 @@ class GoalFragment : Fragment() {
                 var valueToFormat = 0.0f
 
                 valueToFormat = if (goalViewModel.selectedGoal!!.isGoalCompleted()) {
-                    if (value >= 100) goalViewModel.selectedGoal!!.goalAmount!!.toFloat() else goalViewModel.selectedGoal!!.totalBalance.toFloat()
+                    if (value >= 100) goalViewModel.selectedGoal!!.totalBalance.toFloat() else goalViewModel.selectedGoal!!.goalAmount!!.toFloat()
                 } else {
                     if (value == goalViewModel.selectedGoal!!.getTotalBalancePercentage())  goalViewModel.selectedGoal!!.totalBalance.toFloat() else goalViewModel.selectedGoal!!.goalAmount!!.toFloat()
                 }
