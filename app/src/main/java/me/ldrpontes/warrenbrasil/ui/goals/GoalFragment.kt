@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.transition.TransitionInflater
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.transition.MaterialContainerTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_goal.*
 import me.ldrpontes.warrenbrasil.R
@@ -40,8 +40,11 @@ class GoalFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(containerColor)
+        }
+
     }
 
 
@@ -51,7 +54,7 @@ class GoalFragment : Fragment() {
         val navHostFragment = NavHostFragment.findNavController(this)
         NavigationUI.setupWithNavController(toolbar_goal, navHostFragment)
 
-        toolbar_goal.title = goalViewModel.selectedGoal?.name
+        toolbar_goal_title.text = goalViewModel.selectedGoal?.name
 
         startImageViewHandler()
         startPieChartHandler()
@@ -59,12 +62,9 @@ class GoalFragment : Fragment() {
 
 
     private fun startImageViewHandler() {
-        iv_goal.apply {
-            transitionName = "iv_goal_detail"
-            Picasso.get().load(goalViewModel.selectedGoal?.background?.regular).fit()
-                .error(R.drawable.ic_pictures)
-                .into(iv_goal)
-        }
+        Picasso.get().load(goalViewModel.selectedGoal?.background?.regular).fit()
+            .error(R.drawable.ic_pictures)
+            .into(iv_goal)
 
     }
 
@@ -78,8 +78,6 @@ class GoalFragment : Fragment() {
         } else {
             invalidDataHandler()
         }
-
-
     }
 
 
@@ -156,7 +154,7 @@ class GoalFragment : Fragment() {
                 valueToFormat = if (goalViewModel.selectedGoal!!.isGoalCompleted()) {
                     if (value >= 100) goalViewModel.selectedGoal!!.totalBalance.toFloat() else goalViewModel.selectedGoal!!.goalAmount!!.toFloat()
                 } else {
-                    if (value == goalViewModel.selectedGoal!!.getTotalBalancePercentage())  goalViewModel.selectedGoal!!.totalBalance.toFloat() else goalViewModel.selectedGoal!!.goalAmount!!.toFloat()
+                    if (value == goalViewModel.selectedGoal!!.getTotalBalancePercentage()) goalViewModel.selectedGoal!!.totalBalance.toFloat() else goalViewModel.selectedGoal!!.goalAmount!!.toFloat()
                 }
 
                 val formatter = NumberFormat.getCurrencyInstance()

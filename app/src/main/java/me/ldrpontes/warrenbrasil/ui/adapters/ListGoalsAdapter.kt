@@ -34,7 +34,7 @@ class ListGoalsAdapter(private val goals: List<Goal>, private val listener: List
         holder.tvNameGoal.transitionName = "tv_name_goal${filteredGoals[position].id}"
         holder.ivGoal.transitionName = "iv_goal${filteredGoals[position].id}"
 
-        Picasso.get().load(filteredGoals[position].background.small).fit().into(holder.ivGoal)
+        Picasso.get().load(filteredGoals[position].background.regular).fit().into(holder.ivGoal)
 
         holder.clItemGoal.setOnClickListener {
             listener.onGoalClickListener(holder.ivGoal, holder.tvNameGoal, filteredGoals[position])

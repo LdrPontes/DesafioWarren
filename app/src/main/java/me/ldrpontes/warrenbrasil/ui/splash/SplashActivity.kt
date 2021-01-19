@@ -25,8 +25,10 @@ class SplashActivity : AppCompatActivity() {
         splashViewModel.accessState.observe(this, {
             if (it) {
                 startActivity(Intent(this, GoalActivity::class.java))
+                finish()
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         })
     }

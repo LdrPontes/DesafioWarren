@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.android.synthetic.main.fragment_list_goals.*
-import kotlinx.android.synthetic.main.no_data_layout.*
 import kotlinx.coroutines.*
 import me.ldrpontes.domain.entities.Goal
 import me.ldrpontes.warrenbrasil.R
@@ -34,12 +36,17 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
         return inflater.inflate(R.layout.fragment_list_goals, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialElevationScale(false)
+        reenterTransition = MaterialElevationScale(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         startSearchInputListeners()
-        startRecyclerViewGoals()
         startGoalsObserver()
         startSwipeToRefreshListener()
 
@@ -48,6 +55,8 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
             getGoalsCalled = true
         }
 
+
+        startRecyclerViewGoals()
     }
 
 
@@ -80,6 +89,11 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
     private fun startRecyclerViewGoals() {
         rv_list_goals.layoutManager = LinearLayoutManager(context)
         rv_list_goals.adapter = adapter
+
+        postponeEnterTransition()
+        rv_list_goals.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
 
@@ -149,11 +163,13 @@ class ListGoalsFragment : Fragment(), ListGoalsAdapter.ListGoalsListener {
     override fun onGoalClickListener(imageView: View, titleView: View, goal: Goal) {
         goalViewModel.selectedGoal = goal
 
+        val directions: NavDirections = ListGoalsFragmentDirections.nextAction()
+
         val extras = FragmentNavigatorExtras(
             imageView to "iv_goal_detail",
             titleView to "tv_goal_detail"
         )
 
-        findNavController().navigate(R.id.next_action, null, null, extras)
+        findNavController().navigate(directions, extras)
     }
 }
